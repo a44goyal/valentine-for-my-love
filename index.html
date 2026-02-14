@@ -1,199 +1,285 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unlock Our Love</title>
+<title>Our Forever ❤️</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Georgia', serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Georgia',serif;
 }
 
-body {
-    overflow: hidden;
-    background: black;
-    color: white;
+body{
+  background:linear-gradient(135deg,#1a0f0f,#000);
+  color:white;
+  overflow-x:hidden;
 }
 
-/* VIDEO BACKGROUND */
-video {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: -2;
-    opacity: 0.4;
+/* ===== INTRO SCREEN ===== */
+.intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-/* DARK OVERLAY */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4), black 70%);
-    z-index: -1;
+.unlock{
+  padding:14px 35px;
+  border:1px solid gold;
+  background:transparent;
+  color:gold;
+  letter-spacing:3px;
+  font-size:15px;
+  cursor:pointer;
+  transition:.4s;
+  margin-bottom:20px;
 }
 
-/* INTRO SCREEN */
-.intro {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: black;
-    text-align: center;
-    transition: opacity 1.5s ease;
+.unlock:hover{
+  background:gold;
+  color:black;
 }
 
-.intro h1 {
-    font-size: 28px;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
+.enter-btn{
+  display:none;
+  padding:12px 28px;
+  border:1px solid white;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  letter-spacing:2px;
 }
 
-.unlock-btn {
-    padding: 12px 28px;
-    border: 1px solid gold;
-    color: gold;
-    background: transparent;
-    font-size: 14px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.4s ease;
+/* ===== MAIN SECTION ===== */
+.main{
+  display:none;
+  padding:50px 20px;
+  text-align:center;
+  animation:fadeIn 1.5s ease;
 }
 
-.unlock-btn:hover {
-    background: gold;
-    color: black;
+.section-title{
+  font-size:22px;
+  margin-bottom:30px;
+  letter-spacing:2px;
+  color:gold;
 }
 
-/* MAIN CONTENT */
-.main {
-    display: none;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    animation: fadeIn 2s ease forwards;
+/* ===== COLLAGE GRID ===== */
+.collage{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-bottom:50px;
 }
 
-.main img {
-    width: 260px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
-    margin-bottom: 20px;
-    transition: transform 0.5s ease;
+.collage-card{
+  position:relative;
+  cursor:pointer;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 0 25px rgba(255,215,0,.4);
+  transition:.4s;
 }
 
-.main img:hover {
-    transform: scale(1.05);
+.collage-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 45px gold;
 }
 
-.message {
-    font-size: 18px;
-    max-width: 300px;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeIn 3s ease 2s forwards;
+.collage-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
 }
 
-.surprise {
-    position: absolute;
-    bottom: 40px;
-    font-size: 14px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    color: gold;
+/* ===== BOTTOM MESSAGE ===== */
+.bottom-caption{
+  font-size:16px;
+  color:gold;
+  margin-top:30px;
+  line-height:1.6;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.signature{
+  margin-top:20px;
+  font-style:italic;
+  font-size:14px;
+  color:rgba(255,215,0,.8);
+}
+
+/* ===== MODAL ===== */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:100;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.92);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:black;
+  border:1px solid gold;
+  padding:30px;
+  max-width:300px;
+  text-align:center;
+  border-radius:12px;
+  animation:fadeIn .6s ease;
+}
+
+.close{
+  margin-top:15px;
+  color:gold;
+  cursor:pointer;
+}
+
+/* ===== GOLD PARTICLES ===== */
+.particle{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:gold;
+  border-radius:50%;
+  opacity:.8;
+  animation:float 8s linear infinite;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh);}
+  to{ transform:translateY(-10vh);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- OPTIONAL VIDEO BACKGROUND -->
-<video autoplay muted loop>
-  <source src="video.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
-
-<!-- INTRO SCREEN -->
-<div class="intro" id="introScreen">
-    <h1>Unlock Our Love</h1>
-    <button class="unlock-btn" onclick="startExperience()">ENTER</button>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <button class="unlock" onclick="unlock()">Unlock Our Love</button>
+  <button class="enter-btn" id="enterBtn" onclick="enterSite()">Enter</button>
 </div>
 
 <!-- MAIN CONTENT -->
-<div class="main" id="mainContent">
-    <img src="love.jpg" alt="Our Love">
-    <div class="message">
-        Every heartbeat of mine  
-        whispers your name.  
-        Today, tomorrow, forever —  
-        I choose you. ❤️
+<div class="main" id="main">
+  <div class="section-title">Our Beautiful Journey</div>
+
+  <div class="collage">
+
+    <div class="collage-card" onclick="openModal('The moment I knew my heart had found its home ❤️')">
+      <img src="pic1.jpg">
     </div>
-    <div class="surprise" onclick="showSurprise()">
-        Tap for a surprise
+
+    <div class="collage-card" onclick="openModal('Every trip with you feels like destiny unfolding ✈️')">
+      <img src="pic2.jpeg">
     </div>
+
+    <div class="collage-card" onclick="openModal('The day we promised forever… still my favorite memory 💍')">
+      <img src="pic3.jpeg">
+    </div>
+
+    <div class="collage-card" onclick="openModal('No matter where life takes us, I choose you. Always. ❤️')">
+      <img src="pic4.jpeg">
+    </div>
+
+  </div>
+
+  <div class="bottom-caption">
+    Every heartbeat of mine whispers your name.  
+    Today, tomorrow, forever — I choose you. ♥️
+  </div>
+
+  <div class="signature">
+    – Yours, truly Akanksha ❤️
+  </div>
+
 </div>
 
-<!-- AUDIO FILES -->
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div id="modalText"></div>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<!-- HEARTBEAT -->
 <audio id="heartbeat">
   <source src="heartbeat.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="bgMusic" loop>
+<!-- SONG -->
+<audio id="music" loop>
   <source src="Song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function startExperience() {
-    const intro = document.getElementById("introScreen");
-    const main = document.getElementById("mainContent");
-    const heartbeat = document.getElementById("heartbeat");
-    const music = document.getElementById("bgMusic");
+let tapCount = 0;
 
-    // Play heartbeat first
-    heartbeat.play();
-
-    // After 3 seconds, fade into main music
-    setTimeout(() => {
-        music.volume = 0;
-        music.play();
-
-        let fade = setInterval(() => {
-            if (music.volume < 1) {
-                music.volume += 0.05;
-            } else {
-                clearInterval(fade);
-            }
-        }, 200);
-
-    }, 3000);
-
-    intro.style.opacity = "0";
-    setTimeout(() => {
-        intro.style.display = "none";
-        main.style.display = "flex";
-    }, 1500);
+function unlock(){
+  let heartbeat = document.getElementById("heartbeat");
+  heartbeat.play();
+  document.getElementById("enterBtn").style.display="inline-block";
 }
 
-function showSurprise() {
-    alert("You are my forever. 💍❤️");
+function enterSite(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("main").style.display="block";
+
+  let music = document.getElementById("music");
+  music.volume = 0;
+  music.play();
+
+  let fade = setInterval(function(){
+    if(music.volume < 1){
+      music.volume += 0.05;
+    } else {
+      clearInterval(fade);
+    }
+  },300);
 }
+
+function openModal(message){
+  document.getElementById("modalText").innerText = message;
+  document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+/* Hidden 5 tap surprise */
+document.body.addEventListener("click",function(){
+  tapCount++;
+  if(tapCount===5){
+    openModal("This entire experience was coded just for you… because you deserve something extraordinary ❤️");
+  }
+});
+
+/* Golden particles */
+function createParticle(){
+  const particle=document.createElement("div");
+  particle.className="particle";
+  particle.style.left=Math.random()*100+"vw";
+  document.body.appendChild(particle);
+  setTimeout(()=>particle.remove(),8000);
+}
+setInterval(createParticle,200);
 </script>
 
 </body>
