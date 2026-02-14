@@ -17,6 +17,13 @@ body{
   background:linear-gradient(135deg,#1a0f0f,#000);
   color:white;
   overflow-x:hidden;
+  animation:slowZoom 25s ease-in-out infinite alternate;
+}
+
+/* CINEMATIC BACKGROUND ZOOM */
+@keyframes slowZoom{
+  from{background-size:100%;}
+  to{background-size:115%;}
 }
 
 /* ===== INTRO ===== */
@@ -33,10 +40,9 @@ body{
   color:gold;
   letter-spacing:4px;
   margin-bottom:30px;
-  font-size:26px;
+  font-size:28px;
 }
 
-/* PRETTY BUTTON */
 .enter-btn{
   padding:14px 35px;
   border:none;
@@ -58,24 +64,25 @@ body{
 /* ===== MAIN ===== */
 .main{
   display:none;
-  padding:50px 20px;
+  padding:60px 25px;
   text-align:center;
   animation:fadeIn 1.5s ease;
 }
 
 .section-title{
-  font-size:22px;
-  margin-bottom:30px;
-  letter-spacing:2px;
+  font-size:26px;
+  margin-bottom:40px;
+  letter-spacing:3px;
   color:gold;
+  text-transform:uppercase;
 }
 
 /* COLLAGE */
 .collage{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:20px;
-  margin-bottom:25px;
+  gap:25px;
+  margin-bottom:40px;
 }
 
 .collage-card{
@@ -97,23 +104,36 @@ body{
   object-fit:cover;
 }
 
-.hint{
-  font-size:13px;
-  color:rgba(255,215,0,.7);
-  margin-bottom:40px;
+/* INTERACTION SECTION */
+.interaction{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
 }
 
-/* SURPRISE BUTTON */
+.hint{
+  font-size:14px;
+  color:rgba(255,215,0,.8);
+}
+
+/* GLOWING SURPRISE BUTTON */
 .surprise-btn{
-  padding:12px 28px;
+  padding:12px 30px;
   border:1px solid gold;
   background:transparent;
   color:gold;
   letter-spacing:2px;
   border-radius:25px;
   cursor:pointer;
-  margin-top:30px;
+  animation:pulseGlow 2s infinite;
   transition:.4s;
+}
+
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 10px gold;}
+  50%{box-shadow:0 0 30px gold;}
+  100%{box-shadow:0 0 10px gold;}
 }
 
 .surprise-btn:hover{
@@ -123,10 +143,11 @@ body{
 
 /* SIGNATURE */
 .signature{
-  margin-top:40px;
+  margin-top:60px;
   font-style:italic;
   font-size:14px;
-  color:rgba(255,215,0,.8);
+  color:rgba(255,215,0,.9);
+  line-height:1.8;
 }
 
 /* MODAL */
@@ -138,7 +159,7 @@ body{
   top:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,.92);
+  background:rgba(0,0,0,.95);
   justify-content:center;
   align-items:center;
 }
@@ -150,7 +171,6 @@ body{
   max-width:320px;
   text-align:center;
   border-radius:12px;
-  animation:fadeIn .6s ease;
 }
 
 .choice-btn{
@@ -169,6 +189,18 @@ body{
   cursor:pointer;
 }
 
+/* FINAL DRAMATIC SCREEN */
+.final-screen{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-size:26px;
+  color:gold;
+  animation:fadeIn 2s ease forwards;
+}
+
 @keyframes fadeIn{
   from{opacity:0;}
   to{opacity:1;}
@@ -178,57 +210,55 @@ body{
 
 <body>
 
-<!-- INTRO -->
 <div class="intro" id="intro">
   <h1>Unlock Our Love</h1>
   <button class="enter-btn" onclick="enterSite()">Enter</button>
 </div>
 
-<!-- MAIN -->
 <div class="main" id="main">
 
-  <div class="section-title">Our Beautiful Journey</div>
+  <div class="section-title">Our Journey. Our Forever.</div>
 
   <div class="collage">
     <div class="collage-card" onclick="openModal('The moment I knew my heart had found its home ❤️')">
       <img src="pic1.jpg">
     </div>
-
     <div class="collage-card" onclick="openModal('Every trip with you feels like destiny unfolding ✈️')">
       <img src="pic2.jpeg">
     </div>
-
     <div class="collage-card" onclick="openModal('The day we promised forever… still my favorite memory 💍')">
       <img src="pic3.jpeg">
     </div>
-
     <div class="collage-card" onclick="openModal('No matter where life takes us, I choose you. Always. ❤️')">
       <img src="pic4.jpeg">
     </div>
   </div>
 
-  <div class="hint">
-    Tap each memory… there’s something waiting for you ✨
-  </div>
+  <div class="interaction">
+    <div class="hint">
+      Tap a memory… something special is waiting ✨
+    </div>
 
-  <button class="surprise-btn" onclick="openValentine()">
-    Open My Heart 💌
-  </button>
+    <button class="surprise-btn" onclick="openValentine()">
+      Open My Heart 💌
+    </button>
+  </div>
 
   <div class="signature">
-    Built in code. Written in love. 
-         — Yours, Akanksha ❤️
+    Built in code. Written in love.<br>
+    — Yours, Anku ❤️
   </div>
 
 </div>
 
-<!-- MODAL -->
+<div class="final-screen" id="finalScreen">
+  Forever starts every day with you. ❤️
+</div>
+
 <div class="modal" id="modal">
-  <div class="modal-content" id="modalContent">
-  </div>
+  <div class="modal-content" id="modalContent"></div>
 </div>
 
-<!-- SONG -->
 <audio id="music" loop>
   <source src="Song.mp3" type="audio/mpeg">
 </audio>
@@ -239,45 +269,53 @@ function enterSite(){
   document.getElementById("intro").style.display="none";
   document.getElementById("main").style.display="block";
 
-  let music = document.getElementById("music");
-  music.volume = 0;
+  let music=document.getElementById("music");
+  music.volume=0;
   music.play();
 
-  let fade = setInterval(function(){
-    if(music.volume < 1){
-      music.volume += 0.05;
-    } else {
+  let fade=setInterval(function(){
+    if(music.volume<1){
+      music.volume+=0.05;
+    }else{
       clearInterval(fade);
     }
   },300);
 }
 
 function openModal(message){
-  document.getElementById("modalContent").innerHTML =
+  document.getElementById("modalContent").innerHTML=
   `<div>${message}</div>
    <div class="close" onclick="closeModal()">Close</div>`;
   document.getElementById("modal").style.display="flex";
 }
 
+/* TYPING ANIMATION */
 function openValentine(){
-  document.getElementById("modalContent").innerHTML =
-  `<div>
-    Every heartbeat of mine whispers your name. <br><br>
-    Today, tomorrow, forever — I choose you. ♥️ <br><br>
-    Will you be my forever Valentine? 💍❤️
-    <br><br>
-    <button class="choice-btn" onclick="response()">Yes, always ❤️</button>
-    <button class="choice-btn" onclick="response()">I already am 😉</button>
-   </div>`;
   document.getElementById("modal").style.display="flex";
+  let text="Every heartbeat of mine whispers your name.\n\nToday, tomorrow, forever — I choose you.\n\nWill you be my forever Valentine? ❤️";
+  let i=0;
+  let speed=40;
+  document.getElementById("modalContent").innerHTML="<div id='typedText'></div>";
+
+  function typeWriter(){
+    if(i<text.length){
+      document.getElementById("typedText").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typeWriter,speed);
+    }else{
+      document.getElementById("modalContent").innerHTML+=
+      `<br><br>
+      <button class="choice-btn" onclick="response()">Yes, always ❤️</button>
+      <button class="choice-btn" onclick="response()">I already am 😉</button>`;
+    }
+  }
+  typeWriter();
 }
 
 function response(){
-  document.getElementById("modalContent").innerHTML =
-  `<div>
-     You have my heart. Today. Tomorrow. Forever. ❤️
-   </div>
-   <div class="close" onclick="closeModal()">Close</div>`;
+  document.getElementById("modal").style.display="none";
+  document.getElementById("main").style.display="none";
+  document.getElementById("finalScreen").style.display="flex";
 }
 
 function closeModal(){
