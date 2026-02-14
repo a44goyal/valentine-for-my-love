@@ -19,7 +19,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== INTRO SCREEN ===== */
+/* ===== INTRO ===== */
 .intro{
   height:100vh;
   display:flex;
@@ -32,27 +32,30 @@ body{
 .intro h1{
   color:gold;
   letter-spacing:4px;
-  margin-bottom:25px;
+  margin-bottom:30px;
   font-size:26px;
 }
 
+/* PRETTY BUTTON */
 .enter-btn{
   padding:14px 35px;
-  border:1px solid gold;
-  background:transparent;
-  color:gold;
-  letter-spacing:3px;
-  font-size:15px;
+  border:none;
+  background:linear-gradient(45deg,#d4af37,#ffdf80);
+  color:black;
+  font-weight:bold;
+  letter-spacing:2px;
+  border-radius:30px;
   cursor:pointer;
+  box-shadow:0 0 20px rgba(255,215,0,.6);
   transition:.4s;
 }
 
 .enter-btn:hover{
-  background:gold;
-  color:black;
+  transform:scale(1.1);
+  box-shadow:0 0 40px gold;
 }
 
-/* ===== MAIN SECTION ===== */
+/* ===== MAIN ===== */
 .main{
   display:none;
   padding:50px 20px;
@@ -67,7 +70,7 @@ body{
   color:gold;
 }
 
-/* ===== COLLAGE GRID ===== */
+/* COLLAGE */
 .collage{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -76,7 +79,6 @@ body{
 }
 
 .collage-card{
-  position:relative;
   cursor:pointer;
   border-radius:18px;
   overflow:hidden;
@@ -95,30 +97,39 @@ body{
   object-fit:cover;
 }
 
-/* Hint below collage */
 .hint{
   font-size:13px;
   color:rgba(255,215,0,.7);
   margin-bottom:40px;
-  letter-spacing:1px;
 }
 
-/* Bottom romantic message */
-.bottom-caption{
-  font-size:16px;
+/* SURPRISE BUTTON */
+.surprise-btn{
+  padding:12px 28px;
+  border:1px solid gold;
+  background:transparent;
   color:gold;
-  margin-top:20px;
-  line-height:1.6;
+  letter-spacing:2px;
+  border-radius:25px;
+  cursor:pointer;
+  margin-top:30px;
+  transition:.4s;
 }
 
+.surprise-btn:hover{
+  background:gold;
+  color:black;
+}
+
+/* SIGNATURE */
 .signature{
-  margin-top:20px;
+  margin-top:40px;
   font-style:italic;
   font-size:14px;
   color:rgba(255,215,0,.8);
 }
 
-/* ===== MODAL ===== */
+/* MODAL */
 .modal{
   display:none;
   position:fixed;
@@ -136,32 +147,26 @@ body{
   background:black;
   border:1px solid gold;
   padding:30px;
-  max-width:300px;
+  max-width:320px;
   text-align:center;
   border-radius:12px;
   animation:fadeIn .6s ease;
+}
+
+.choice-btn{
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  background:gold;
+  color:black;
 }
 
 .close{
   margin-top:15px;
   color:gold;
   cursor:pointer;
-}
-
-/* ===== GOLD PARTICLES ===== */
-.particle{
-  position:fixed;
-  width:3px;
-  height:3px;
-  background:gold;
-  border-radius:50%;
-  opacity:.8;
-  animation:float 8s linear infinite;
-}
-
-@keyframes float{
-  from{ transform:translateY(100vh);}
-  to{ transform:translateY(-10vh);}
 }
 
 @keyframes fadeIn{
@@ -179,51 +184,47 @@ body{
   <button class="enter-btn" onclick="enterSite()">Enter</button>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div class="main" id="main">
 
   <div class="section-title">Our Beautiful Journey</div>
 
   <div class="collage">
-
     <div class="collage-card" onclick="openModal('The moment I knew my heart had found its home ❤️')">
       <img src="pic1.jpg">
     </div>
 
     <div class="collage-card" onclick="openModal('Every trip with you feels like destiny unfolding ✈️')">
-      <img src="pic2.jpg">
+      <img src="pic2.jpeg">
     </div>
 
     <div class="collage-card" onclick="openModal('The day we promised forever… still my favorite memory 💍')">
-      <img src="pic3.jpg">
+      <img src="pic3.jpeg">
     </div>
 
     <div class="collage-card" onclick="openModal('No matter where life takes us, I choose you. Always. ❤️')">
-      <img src="pic4.jpg">
+      <img src="pic4.jpeg">
     </div>
-
   </div>
 
   <div class="hint">
     Tap each memory… there’s something waiting for you ✨
   </div>
 
-  <div class="bottom-caption">
-    Every heartbeat of mine whispers your name.  
-    Today, tomorrow, forever — I choose you. ♥️
-  </div>
+  <button class="surprise-btn" onclick="openValentine()">
+    Open My Heart 💌
+  </button>
 
   <div class="signature">
-    – Yours, truly Akanksha ❤️
+    Built in code. Written in love. 
+         — Yours, Akanksha ❤️
   </div>
 
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <div id="modalText"></div>
-    <div class="close" onclick="closeModal()">Close</div>
+  <div class="modal-content" id="modalContent">
   </div>
 </div>
 
@@ -233,7 +234,6 @@ body{
 </audio>
 
 <script>
-let tapCount = 0;
 
 function enterSite(){
   document.getElementById("intro").style.display="none";
@@ -253,31 +253,37 @@ function enterSite(){
 }
 
 function openModal(message){
-  document.getElementById("modalText").innerText = message;
+  document.getElementById("modalContent").innerHTML =
+  `<div>${message}</div>
+   <div class="close" onclick="closeModal()">Close</div>`;
   document.getElementById("modal").style.display="flex";
+}
+
+function openValentine(){
+  document.getElementById("modalContent").innerHTML =
+  `<div>
+    Every heartbeat of mine whispers your name. <br><br>
+    Today, tomorrow, forever — I choose you. ♥️ <br><br>
+    Will you be my forever Valentine? 💍❤️
+    <br><br>
+    <button class="choice-btn" onclick="response()">Yes, always ❤️</button>
+    <button class="choice-btn" onclick="response()">I already am 😉</button>
+   </div>`;
+  document.getElementById("modal").style.display="flex";
+}
+
+function response(){
+  document.getElementById("modalContent").innerHTML =
+  `<div>
+     You have my heart. Today. Tomorrow. Forever. ❤️
+   </div>
+   <div class="close" onclick="closeModal()">Close</div>`;
 }
 
 function closeModal(){
   document.getElementById("modal").style.display="none";
 }
 
-/* Hidden 5 tap surprise */
-document.body.addEventListener("click",function(){
-  tapCount++;
-  if(tapCount===5){
-    openModal("This entire experience was coded just for you… because you deserve something extraordinary ❤️");
-  }
-});
-
-/* Golden particles */
-function createParticle(){
-  const particle=document.createElement("div");
-  particle.className="particle";
-  particle.style.left=Math.random()*100+"vw";
-  document.body.appendChild(particle);
-  setTimeout(()=>particle.remove(),8000);
-}
-setInterval(createParticle,200);
 </script>
 
 </body>
