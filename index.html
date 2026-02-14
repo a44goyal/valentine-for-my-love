@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Story ❤️</title>
+<title>Unlock Our Love</title>
 
 <style>
 * {
@@ -14,159 +14,104 @@
 }
 
 body {
+    overflow: hidden;
     background: black;
     color: white;
-    overflow-x: hidden;
 }
 
-/* Dark luxury gradient */
-body::before {
-    content: "";
+/* VIDEO BACKGROUND */
+video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.4;
+}
+
+/* DARK OVERLAY */
+.overlay {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, #2a1a1a, black 70%);
-    z-index: -2;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4), black 70%);
+    z-index: -1;
 }
 
-/* Intro Screen */
+/* INTRO SCREEN */
 .intro {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: black;
+    text-align: center;
+    transition: opacity 1.5s ease;
 }
 
-.unlock {
-    padding: 14px 32px;
-    border: 1px solid gold;
-    background: transparent;
-    color: gold;
+.intro h1 {
+    font-size: 28px;
     letter-spacing: 3px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.4s ease;
+    margin-bottom: 20px;
 }
 
-.unlock:hover {
+.unlock-btn {
+    padding: 12px 28px;
+    border: 1px solid gold;
+    color: gold;
+    background: transparent;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.unlock-btn:hover {
     background: gold;
     color: black;
 }
 
-/* Main Content */
+/* MAIN CONTENT */
 .main {
     display: none;
-    text-align: center;
-    padding: 50px 20px;
-    animation: fadeIn 1.5s ease;
-}
-
-/* Hero Image */
-.hero {
-    width: 280px;
-    border-radius: 20px;
-    box-shadow: 0 0 40px gold;
-    margin-bottom: 40px;
-    animation: glow 3s infinite alternate;
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 20px gold; }
-    to { box-shadow: 0 0 60px gold; }
-}
-
-/* Gallery */
-.gallery {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-
-.photo-card {
-    text-align: center;
-    cursor: pointer;
-    max-width: 180px;
-}
-
-.photo-card img {
-    width: 160px;
-    border-radius: 15px;
-    transition: 0.4s ease;
-}
-
-.photo-card img:hover {
-    transform: scale(1.08);
-}
-
-/* Short Caption */
-.caption {
-    font-size: 14px;
-    margin-top: 8px;
-    color: gold;
-    letter-spacing: 1px;
-}
-
-/* Long Romantic Caption */
-.long-caption {
-    font-size: 12px;
-    margin-top: 6px;
-    color: rgba(255,215,0,0.8);
-    line-height: 1.4;
-}
-
-/* Modal Popup */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
+    height: 100vh;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
-    background: black;
-    border: 1px solid gold;
-    padding: 30px;
-    max-width: 300px;
     text-align: center;
-    border-radius: 10px;
-    animation: fadeIn 0.6s ease;
+    animation: fadeIn 2s ease forwards;
 }
 
-.close {
-    margin-top: 15px;
-    color: gold;
-    cursor: pointer;
+.main img {
+    width: 260px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
 }
 
-/* Signature */
-.signature {
-    margin-top: 60px;
-    font-style: italic;
-    color: gold;
+.main img:hover {
+    transform: scale(1.05);
+}
+
+.message {
+    font-size: 18px;
+    max-width: 300px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 3s ease 2s forwards;
+}
+
+.surprise {
+    position: absolute;
+    bottom: 40px;
     font-size: 14px;
-}
-
-/* Floating golden particles */
-.particle {
-    position: fixed;
-    width: 3px;
-    height: 3px;
-    background: gold;
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: float 8s linear infinite;
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: gold;
 }
 
 @keyframes fadeIn {
@@ -178,127 +123,77 @@ body::before {
 
 <body>
 
-<!-- Intro -->
-<div class="intro" id="intro">
-    <button class="unlock" onclick="start()">Unlock Our Love</button>
+<!-- OPTIONAL VIDEO BACKGROUND -->
+<video autoplay muted loop>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- INTRO SCREEN -->
+<div class="intro" id="introScreen">
+    <h1>Unlock Our Love</h1>
+    <button class="unlock-btn" onclick="startExperience()">ENTER</button>
 </div>
 
-<!-- Main Content -->
-<div class="main" id="main">
-
-    <!-- Main Hero Image -->
-    <img src="love.jpg" class="hero">
-
-    <!-- Gallery -->
-    <div class="gallery">
-
-        <div class="photo-card" onclick="openModal('You looked at me and my world changed that day ❤️')">
-            <img src="pic1.jpg">
-            <div class="caption">The Beginning</div>
-            <div class="long-caption">
-                You looked at me and my world changed that day ❤️
-            </div>
-        </div>
-
-        <div class="photo-card" onclick="openModal('Our first adventure… and I knew I wanted a lifetime of these 🥰')">
-            <img src="pic2.jpeg">
-            <div class="caption">Our First Trip</div>
-            <div class="long-caption">
-                Our first adventure… and I knew I wanted a lifetime of these 🥰
-            </div>
-        </div>
-
-        <div class="photo-card" onclick="openModal('The day we promised forever 💍')">
-            <img src="pic3.jpeg">
-            <div class="caption">We Said Yes</div>
-            <div class="long-caption">
-                The day we promised forever 💍
-            </div>
-        </div>
-
-        <div class="photo-card" onclick="openModal('Still choosing you. Every single day. ❤️')">
-            <img src="pic4.jpg">
-            <div class="caption">Always Us</div>
-            <div class="long-caption">
-                Still choosing you. Every single day. ❤️
-            </div>
-        </div>
-
+<!-- MAIN CONTENT -->
+<div class="main" id="mainContent">
+    <img src="love.jpg" alt="Our Love">
+    <div class="message">
+        Every heartbeat of mine  
+        whispers your name.  
+        Today, tomorrow, forever —  
+        I choose you. ❤️
     </div>
-
-    <div class="signature">– Yours, Akanksha ❤️</div>
-</div>
-
-<!-- Modal -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <div id="modalText"></div>
-        <div class="close" onclick="closeModal()">Close</div>
+    <div class="surprise" onclick="showSurprise()">
+        Tap for a surprise
     </div>
 </div>
 
-<!-- Heartbeat sound -->
+<!-- AUDIO FILES -->
 <audio id="heartbeat">
   <source src="heartbeat.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Main Song -->
-<audio id="music" loop>
+<audio id="bgMusic" loop>
   <source src="Song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-let tapCount = 0;
+function startExperience() {
+    const intro = document.getElementById("introScreen");
+    const main = document.getElementById("mainContent");
+    const heartbeat = document.getElementById("heartbeat");
+    const music = document.getElementById("bgMusic");
 
-function start() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("main").style.display = "block";
-
-    let heartbeat = document.getElementById("heartbeat");
-    let music = document.getElementById("music");
-
+    // Play heartbeat first
     heartbeat.play();
 
-    setTimeout(function(){
+    // After 3 seconds, fade into main music
+    setTimeout(() => {
         music.volume = 0;
         music.play();
 
-        let fade = setInterval(function(){
+        let fade = setInterval(() => {
             if (music.volume < 1) {
                 music.volume += 0.05;
             } else {
                 clearInterval(fade);
             }
-        }, 300);
-    }, 2000);
+        }, 200);
+
+    }, 3000);
+
+    intro.style.opacity = "0";
+    setTimeout(() => {
+        intro.style.display = "none";
+        main.style.display = "flex";
+    }, 1500);
 }
 
-function openModal(message) {
-    document.getElementById("modalText").innerText = message;
-    document.getElementById("modal").style.display = "flex";
+function showSurprise() {
+    alert("You are my forever. 💍❤️");
 }
-
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-/* Hidden 5 tap surprise */
-document.body.addEventListener("click", function() {
-    tapCount++;
-    if (tapCount === 5) {
-        openModal("Fun fact: This entire experience was coded just for you 😌❤️");
-    }
-});
-
-/* Golden floating particles */
-function createParticle() {
-    const particle = document.createElement("div");
-    particle.className = "particle";
-    particle.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 8000);
-}
-setInterval(createParticle, 200);
 </script>
 
 </body>
