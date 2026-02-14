@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unlock Our Love</title>
+<title>Our Story ❤️</title>
 
 <style>
 * {
@@ -14,186 +14,200 @@
 }
 
 body {
-    overflow: hidden;
     background: black;
     color: white;
+    overflow-x: hidden;
 }
 
-/* VIDEO BACKGROUND */
+/* Background video */
 video {
     position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     z-index: -2;
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
-/* DARK OVERLAY */
 .overlay {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4), black 70%);
+    background: radial-gradient(circle, rgba(0,0,0,0.4), black 70%);
     z-index: -1;
 }
 
-/* INTRO SCREEN */
+/* Intro */
 .intro {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: black;
-    text-align: center;
-    transition: opacity 1.5s ease;
 }
 
-.intro h1 {
-    font-size: 28px;
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-}
-
-.unlock-btn {
+.unlock {
     padding: 12px 28px;
     border: 1px solid gold;
-    color: gold;
     background: transparent;
-    font-size: 14px;
-    letter-spacing: 2px;
+    color: gold;
     cursor: pointer;
-    transition: all 0.4s ease;
+    letter-spacing: 2px;
 }
 
-.unlock-btn:hover {
-    background: gold;
-    color: black;
-}
-
-/* MAIN CONTENT */
+/* Main */
 .main {
     display: none;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    animation: fadeIn 2s ease forwards;
+    padding: 40px 20px;
 }
 
-.main img {
-    width: 260px;
+.main img.hero {
+    width: 280px;
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
-    margin-bottom: 20px;
-    transition: transform 0.5s ease;
+    box-shadow: 0 0 30px gold;
+    transition: 0.5s ease;
 }
 
-.main img:hover {
+.main img.hero:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 50px gold;
 }
 
-.message {
-    font-size: 18px;
-    max-width: 300px;
-    line-height: 1.6;
-    opacity: 0;
-    animation: fadeIn 3s ease 2s forwards;
+/* Gallery */
+.gallery {
+    margin-top: 40px;
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 10px;
 }
 
-.surprise {
-    position: absolute;
-    bottom: 40px;
-    font-size: 14px;
-    letter-spacing: 2px;
-    cursor: pointer;
+.gallery img {
+    width: 160px;
+    border-radius: 15px;
+    flex-shrink: 0;
+}
+
+/* Timeline */
+.timeline {
+    margin-top: 50px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.timeline div {
+    margin-bottom: 20px;
+    border-left: 2px solid gold;
+    padding-left: 15px;
+}
+
+/* Signature */
+.signature {
+    margin-top: 40px;
+    font-style: italic;
     color: gold;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Golden particles */
+.particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: gold;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- OPTIONAL VIDEO BACKGROUND -->
 <video autoplay muted loop>
   <source src="video.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- INTRO SCREEN -->
-<div class="intro" id="introScreen">
-    <h1>Unlock Our Love</h1>
-    <button class="unlock-btn" onclick="startExperience()">ENTER</button>
+<div class="intro" id="intro">
+    <h2>Unlock Our Love</h2>
+    <button class="unlock" onclick="start()">ENTER</button>
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main" id="mainContent">
-    <img src="love.jpg" alt="Our Love">
-    <div class="message">
-        Every heartbeat of mine  
-        whispers your name.  
-        Today, tomorrow, forever —  
-        I choose you. ❤️
+<div class="main" id="main">
+    <img src="love.jpg" class="hero">
+
+    <div class="gallery">
+        <img src="pic1.jpg">
+        <img src="pic2.jpg">
+        <img src="pic3.jpg">
+        <img src="pic4.jpg">
     </div>
-    <div class="surprise" onclick="showSurprise()">
-        Tap for a surprise
+
+    <div class="timeline">
+        <div><strong>The Day We Met</strong><br>Our story quietly began.</div>
+        <div><strong>Our First Trip</strong><br>Where memories turned magical.</div>
+        <div><strong>We Said Yes</strong><br>Forever started here.</div>
     </div>
+
+    <div class="signature">– Yours, Akanksha 💍</div>
 </div>
 
-<!-- AUDIO FILES -->
 <audio id="heartbeat">
   <source src="heartbeat.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="bgMusic" loop>
+<audio id="music" loop>
   <source src="Song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function startExperience() {
-    const intro = document.getElementById("introScreen");
-    const main = document.getElementById("mainContent");
-    const heartbeat = document.getElementById("heartbeat");
-    const music = document.getElementById("bgMusic");
+let tapCount = 0;
 
-    // Play heartbeat first
+function start() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "block";
+
+    const heartbeat = document.getElementById("heartbeat");
+    const music = document.getElementById("music");
+
     heartbeat.play();
 
-    // After 3 seconds, fade into main music
     setTimeout(() => {
         music.volume = 0;
         music.play();
-
         let fade = setInterval(() => {
-            if (music.volume < 1) {
-                music.volume += 0.05;
-            } else {
-                clearInterval(fade);
-            }
+            if (music.volume < 1) music.volume += 0.05;
+            else clearInterval(fade);
         }, 200);
-
     }, 3000);
-
-    intro.style.opacity = "0";
-    setTimeout(() => {
-        intro.style.display = "none";
-        main.style.display = "flex";
-    }, 1500);
 }
 
-function showSurprise() {
-    alert("You are my forever. 💍❤️");
+/* Golden particles */
+function createParticle() {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(particle);
+    setTimeout(() => particle.remove(), 8000);
 }
+setInterval(createParticle, 200);
+
+/* Hidden second surprise */
+document.body.addEventListener("click", function() {
+    tapCount++;
+    if (tapCount === 5) {
+        alert("No matter how many lifetimes, I will always find you ❤️");
+    }
+});
 </script>
 
 </body>
