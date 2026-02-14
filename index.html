@@ -284,4 +284,59 @@ function enterSite(){
   document.getElementById("main").style.display="block";
 
   let music=document.getElementById("music");
-  music.
+  music.volume=0;
+  music.play();
+
+  let fade=setInterval(function(){
+    if(music.volume<1){
+      music.volume+=0.05;
+    }else{
+      clearInterval(fade);
+    }
+  },300);
+}
+
+/* UPDATED MODAL FUNCTION */
+function openModal(imageSrc,message){
+  document.getElementById("modalContent").innerHTML=
+  `<img src="${imageSrc}">
+   <div>${message}</div>
+   <div class="close" onclick="closeModal()">Close</div>`;
+  document.getElementById("modal").style.display="flex";
+}
+
+function openValentine(){
+  document.getElementById("modal").style.display="flex";
+  let text="Every heartbeat of mine whispers your name.\n\nToday, tomorrow, forever — I choose you.\n\nWill you be my forever Valentine? ❤️";
+  let i=0;
+  let speed=40;
+  document.getElementById("modalContent").innerHTML="<div id='typedText'></div>";
+
+  function typeWriter(){
+    if(i<text.length){
+      document.getElementById("typedText").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typeWriter,speed);
+    }else{
+      document.getElementById("modalContent").innerHTML+=
+      `<br><br>
+      <button class="choice-btn" onclick="response()">Yes, always ❤️</button>
+      <button class="choice-btn" onclick="response()">I already am 😉</button>`;
+    }
+  }
+  typeWriter();
+}
+
+function response(){
+  document.getElementById("modal").style.display="none";
+  document.getElementById("main").style.display="none";
+  document.getElementById("finalScreen").style.display="flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html>
