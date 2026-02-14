@@ -20,7 +20,6 @@ body{
   animation:slowZoom 25s ease-in-out infinite alternate;
 }
 
-/* CINEMATIC BACKGROUND ZOOM */
 @keyframes slowZoom{
   from{background-size:100%;}
   to{background-size:115%;}
@@ -34,14 +33,14 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  transform:translateY(-40px); /* moved up */
+  transform:translateY(-40px);
 }
 
 .intro h1{
   color:gold;
   letter-spacing:3px;
   margin-bottom:25px;
-  font-size:22px; /* smaller */
+  font-size:22px;
 }
 
 .enter-btn{
@@ -65,14 +64,14 @@ body{
 /* ===== MAIN ===== */
 .main{
   display:none;
-  padding:40px 25px 60px; /* reduced top padding */
+  padding:40px 25px 60px;
   text-align:center;
   animation:fadeIn 1.5s ease;
-  transform:translateY(-20px); /* slight upward shift */
+  transform:translateY(-20px);
 }
 
 .section-title{
-  font-size:20px;  /* smaller text */
+  font-size:20px;
   margin-bottom:30px;
   letter-spacing:2px;
   color:gold;
@@ -106,7 +105,7 @@ body{
   object-fit:cover;
 }
 
-/* INTERACTION SECTION */
+/* INTERACTION */
 .interaction{
   display:flex;
   flex-direction:column;
@@ -119,7 +118,6 @@ body{
   color:rgba(255,215,0,.8);
 }
 
-/* GLOWING SURPRISE BUTTON */
 .surprise-btn{
   padding:10px 25px;
   border:1px solid gold;
@@ -171,10 +169,21 @@ body{
   background:black;
   border:1px solid gold;
   padding:25px;
-  max-width:300px;
+  max-width:320px;
   text-align:center;
   border-radius:12px;
   font-size:14px;
+  animation:fadeIn 0.8s ease;
+}
+
+/* Small elegant image inside modal */
+.modal-content img{
+  width:140px;
+  height:140px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:15px;
+  box-shadow:0 0 20px rgba(255,215,0,.5);
 }
 
 .choice-btn{
@@ -195,7 +204,7 @@ body{
   font-size:12px;
 }
 
-/* FINAL DRAMATIC SCREEN */
+/* FINAL SCREEN */
 .final-screen{
   display:none;
   height:100vh;
@@ -223,26 +232,26 @@ body{
 
 <div class="main" id="main">
 
-  <div class="section-title">Our Beautiful Journey</div>
+  <div class="section-title">A Beautiful Journey</div>
 
   <div class="collage">
-    <div class="collage-card" onclick="openModal('The way we glow together like this… I promise to keep our love sparkly, soft, and beautifully ours. ✨❤️')">
+    <div class="collage-card" onclick="openModal('pic1.jpg','The way we glow together like this… I promise to keep our love sparkly, soft, and beautifully ours. ✨❤️')">
       <img src="pic1.jpg">
     </div>
-    <div class="collage-card" onclick="openModal('In this fearless, magical moment ✨… I promise to always believe in you 💪, stand by you 🤝, and celebrate every bit of magic we share🌟.')">
+    <div class="collage-card" onclick="openModal('pic2.jpeg','In this fearless, magical moment ✨… I promise to always believe in you 💪, stand by you 🤝, and celebrate every bit of magic we share 🌟.')">
       <img src="pic2.jpeg">
     </div>
-    <div class="collage-card" onclick="openModal('The way you hold me here 💛… I promise to always giggle in your arms 🩷 and love you in every little way 🌸')">
+    <div class="collage-card" onclick="openModal('pic3.jpeg','The way you hold me here 💛… I promise to always giggle in your arms 🩷 and love you in every little way 🌸')">
       <img src="pic3.jpeg">
     </div>
-    <div class="collage-card" onclick="openModal('Madly in love with you 💛… I promise forever, and to always trouble you in my own sweet way✨💌')">
+    <div class="collage-card" onclick="openModal('pic4.jpeg','Madly in love with you 💛… I promise forever, and to always trouble you in my own sweet way ✨💌')">
       <img src="pic4.jpeg">
     </div>
   </div>
 
   <div class="interaction">
     <div class="hint">
-      Each memory hides a promise… TAP TO SEE ✨
+      Tap a memory… something special is waiting ✨
     </div>
 
     <button class="surprise-btn" onclick="openValentine()">
@@ -275,57 +284,4 @@ function enterSite(){
   document.getElementById("main").style.display="block";
 
   let music=document.getElementById("music");
-  music.volume=0;
-  music.play();
-
-  let fade=setInterval(function(){
-    if(music.volume<1){
-      music.volume+=0.05;
-    }else{
-      clearInterval(fade);
-    }
-  },300);
-}
-
-function openModal(message){
-  document.getElementById("modalContent").innerHTML=
-  `<div>${message}</div>
-   <div class="close" onclick="closeModal()">Close</div>`;
-  document.getElementById("modal").style.display="flex";
-}
-
-function openValentine(){
-  document.getElementById("modal").style.display="flex";
-  let text="Every heartbeat of mine whispers your name.\n\nToday, tomorrow, forever — I choose you.\n\nWill you be my forever Valentine? ❤️";
-  let i=0;
-  let speed=40;
-  document.getElementById("modalContent").innerHTML="<div id='typedText'></div>";
-
-  function typeWriter(){
-    if(i<text.length){
-      document.getElementById("typedText").innerHTML+=text.charAt(i);
-      i++;
-      setTimeout(typeWriter,speed);
-    }else{
-      document.getElementById("modalContent").innerHTML+=
-      `<br><br>
-      <button class="choice-btn" onclick="response()">Yes, always ❤️</button>
-      <button class="choice-btn" onclick="response()">I already am 😉</button>`;
-    }
-  }
-  typeWriter();
-}
-
-function response(){
-  document.getElementById("modal").style.display="none";
-  document.getElementById("main").style.display="none";
-  document.getElementById("finalScreen").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-</script>
-
-</body>
-</html>
+  music.
