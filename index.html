@@ -3,116 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
+<title>Unlock Our Love</title>
 
 <style>
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+}
+
+body {
+    overflow: hidden;
+    background: black;
+    color: white;
+}
+
+/* VIDEO BACKGROUND */
+video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.4;
+}
+
+/* DARK OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4), black 70%);
+    z-index: -1;
+}
+
+/* INTRO SCREEN */
+.intro {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ffd6e0, #ffeaf4, #e0f7ff);
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
-}
-
-/* Main Card */
-.card {
+    background: black;
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    border-radius: 25px;
-    backdrop-filter: blur(15px);
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
-    animation: fadeIn 2s ease;
-    z-index: 2;
+    transition: opacity 1.5s ease;
 }
 
-h1 {
-    color: #ff2e63;
-    font-size: 22px;
+.intro h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
     margin-bottom: 20px;
 }
 
-/* Image Styling */
-img {
+.unlock-btn {
+    padding: 12px 28px;
+    border: 1px solid gold;
+    color: gold;
+    background: transparent;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.unlock-btn:hover {
+    background: gold;
+    color: black;
+}
+
+/* MAIN CONTENT */
+.main {
+    display: none;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+}
+
+.main img {
     width: 260px;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    margin-bottom: 15px;
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
 }
 
-/* Tap Text */
-.tap-text {
-    font-size: 14px;
-    color: #ff4d6d;
-    opacity: 0.8;
+.main img:hover {
+    transform: scale(1.05);
 }
 
-/* Floating Hearts */
-.heart {
+.message {
+    font-size: 18px;
+    max-width: 300px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn 3s ease 2s forwards;
+}
+
+.surprise {
     position: absolute;
-    color: #ff6b81;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.6;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(-10vh) scale(1.5);
-        opacity: 0;
-    }
+    bottom: 40px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: gold;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-    <h1>Happy Valentine's Day, My Love ❤️</h1>
-    <img src="love.jpg" alt="Our Love">
-    <p class="tap-text">Tap anywhere my love ❤️</p>
+<!-- OPTIONAL VIDEO BACKGROUND -->
+<video autoplay muted loop>
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- INTRO SCREEN -->
+<div class="intro" id="introScreen">
+    <h1>Unlock Our Love</h1>
+    <button class="unlock-btn" onclick="startExperience()">ENTER</button>
 </div>
 
-<!-- Background Music -->
+<!-- MAIN CONTENT -->
+<div class="main" id="mainContent">
+    <img src="love.jpg" alt="Our Love">
+    <div class="message">
+        Every heartbeat of mine  
+        whispers your name.  
+        Today, tomorrow, forever —  
+        I choose you. ❤️
+    </div>
+    <div class="surprise" onclick="showSurprise()">
+        Tap for a surprise
+    </div>
+</div>
+
+<!-- AUDIO FILES -->
+<audio id="heartbeat">
+  <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
+
 <audio id="bgMusic" loop>
-    <source src="Song.mp3" type="audio/mpeg">
+  <source src="Song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Play music on first tap (iPhone compatible)
-document.addEventListener("click", function () {
+function startExperience() {
+    const intro = document.getElementById("introScreen");
+    const main = document.getElementById("mainContent");
+    const heartbeat = document.getElementById("heartbeat");
     const music = document.getElementById("bgMusic");
-    music.play();
-}, { once: true });
 
-// Floating hearts generator
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
+    // Play heartbeat first
+    heartbeat.play();
 
+    // After 3 seconds, fade into main music
     setTimeout(() => {
-        heart.remove();
-    }, 6000);
+        music.volume = 0;
+        music.play();
+
+        let fade = setInterval(() => {
+            if (music.volume < 1) {
+                music.volume += 0.05;
+            } else {
+                clearInterval(fade);
+            }
+        }, 200);
+
+    }, 3000);
+
+    intro.style.opacity = "0";
+    setTimeout(() => {
+        intro.style.display = "none";
+        main.style.display = "flex";
+    }, 1500);
 }
 
-setInterval(createHeart, 500);
+function showSurprise() {
+    alert("You are my forever. 💍❤️");
+}
 </script>
 
 </body>
