@@ -1,163 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Love ❤️</title>
 
 <style>
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ffe6f0, #fbeaff, #e6f7ff);
-}
-
-/* Blurred background image */
-.bg {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    background: url('love.jpg') center/cover no-repeat;
-    filter: blur(40px) brightness(1.2);
-    z-index: -2;
-}
-
-/* Soft overlay */
-.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(20px);
-    z-index: -1;
+    background: linear-gradient(135deg, #ffd6e0, #ffeaf4, #e0f7ff);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
 }
 
 /* Main Card */
 .card {
     text-align: center;
+    background: rgba(255, 255, 255, 0.8);
     padding: 30px;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
     animation: fadeIn 2s ease;
+    z-index: 2;
 }
 
-/* Heading */
 h1 {
-    font-size: 34px;
-    color: #ff3e88;
-    margin-bottom: 10px;
-    animation: slideDown 2s ease;
+    color: #ff2e63;
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
-/* Romantic line */
-p {
-    font-size: 18px;
-    color: #a64d79;
-    margin-bottom: 25px;
-    opacity: 0;
-    animation: fadeText 3s forwards;
-    animation-delay: 1.5s;
-}
-
-/* Main image */
+/* Image Styling */
 img {
-    width: 280px;
-    border-radius: 30px;
-    box-shadow: 0 30px 60px rgba(255,105,180,0.4);
-    transition: 0.4s ease;
+    width: 260px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
 }
 
-img:hover {
-    transform: scale(1.05);
+/* Tap Text */
+.tap-text {
+    font-size: 14px;
+    color: #ff4d6d;
+    opacity: 0.8;
 }
 
-/* Button */
-button {
-    margin-top: 25px;
-    padding: 14px 30px;
-    font-size: 18px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(to right, #ff99cc, #ff66b2);
-    color: white;
-    box-shadow: 0 15px 25px rgba(255, 105, 180, 0.4);
-    transition: 0.3s;
-}
-
-button:hover {
-    transform: translateY(-3px);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
-}
-
-@keyframes slideDown {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-@keyframes fadeText {
-    to {opacity: 1;}
-}
-
-/* Floating hearts */
+/* Floating Hearts */
 .heart {
     position: absolute;
-    font-size: 18px;
-    color: rgba(255, 105, 180, 0.5);
-    animation: floatUp 8s linear infinite;
+    color: #ff6b81;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.6;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 0; }
-    30% { opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
+    0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="overlay"></div>
-
 <div class="card">
-    <h1>Happy Valentine’s Day ❤️</h1>
-    <p>Tum ho toh sab hai ✨</p>
+    <h1>Happy Valentine's Day, My Love ❤️</h1>
     <img src="love.jpg" alt="Our Love">
-    <br>
-    <button onclick="playMusic()">Play Our Song 🎶</button>
+    <p class="tap-text">Tap anywhere my love ❤️</p>
 </div>
 
+<!-- Background Music -->
 <audio id="bgMusic" loop>
     <source src="Song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function playMusic() {
-    document.getElementById("bgMusic").play();
-}
+// Play music on first tap (iPhone compatible)
+document.addEventListener("click", function () {
+    const music = document.getElementById("bgMusic");
+    music.play();
+}, { once: true });
 
+// Floating hearts generator
 function createHeart() {
     const heart = document.createElement("div");
-    heart.classList.add("heart");
+    heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
     document.body.appendChild(heart);
+
     setTimeout(() => {
         heart.remove();
-    }, 8000);
+    }, 6000);
 }
 
-setInterval(createHeart, 600);
+setInterval(createHeart, 500);
 </script>
 
 </body>
